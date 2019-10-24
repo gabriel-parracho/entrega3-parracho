@@ -15,7 +15,7 @@ class PostagemList(APIView):
     def post(self, request):
         nome = request.data['nome']
         texto = request.data['texto']
-        autor = request.user['usuario']
+        autor = request.data['usuario']
         likes = request.data['numero likes']
         comentarios = request.data['numero comentarios']
         rts = request.data['numero rts']
