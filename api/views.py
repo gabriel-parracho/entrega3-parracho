@@ -45,8 +45,8 @@ class UsuarioList(APIView):
         nickname = request.data['nickname']
         seguindo = request.data['seguindo']
         seguidores = request.data['seguidores']
-        usuario = usuario(nome= nome,
-                          nickname= nickename,
+        usuario = Usuario(nome= nome,
+                          nickname= nickname,
                           seguindo= seguindo,
                           seguidores= seguidores                            
                           )
