@@ -3,8 +3,11 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from api.model.Postagem import Postagem
 from api.model.Usuario import Usuario
+from api.model.Comentario import Comentario
 from api.serializers import PostagemSerializer
 from api.serializers import UsuarioSerializer
+from api.serializers import ComentarioSerializer
+
 
 
 class PostagemList(APIView):
@@ -54,4 +57,25 @@ class UsuarioList(APIView):
         data = UsuarioSerializer(usuario).data
 
         return Response(data)
+
+class ComentarioList(APIView):
+    def get(self, request):
+        comentario = Comentario.objects.all()
+        data = ComentarioSerializer(comentario, many=True).data
+
+        return Response(data)
+
+    def post(self, request):
+        autor = request.data['autor']
+        texto = request.data['texto']
+        likes = request.data['numero likes']
+        comentario = Comentario(autor= autor,
+                                texto= texto,
+                                likes= likes
+                                )
+        comentario.save()
+        data = ComentarioSerializer(comentario).data
+
+        return Response(data)
+
 # Create your views here.
